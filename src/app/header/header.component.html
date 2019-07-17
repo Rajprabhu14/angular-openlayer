@@ -2,8 +2,10 @@
   <mat-toolbar-row >
     <span>Roadata</span>
     <span class="example-spacer"></span>
-     
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">supervised_user_circle</mat-icon>
+     <button mat-button (click)="openDialog()">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">supervised_user_circle</mat-icon>
+     </button>
+    
     <button mat-button [matMenuTriggerFor]="beforeMenu">
     <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">apps</mat-icon>
     </button>

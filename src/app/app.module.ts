@@ -7,10 +7,16 @@ import { MapModule } from './map/map.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from './material-module';
 import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
+  ],
+  entryComponents: [
+    LoginComponent
+
   ],
   imports: [
     BrowserModule,
