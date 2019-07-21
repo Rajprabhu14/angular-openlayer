@@ -1,9 +1,9 @@
 <mat-toolbar color="primary" class="mat-navbar">
   <mat-toolbar-row >
-    <span>Roadata</span>
+      <span routerLink="/">Roadata</span>
     <span class="example-spacer"></span>
      <button mat-button (click)="openDialog()">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">supervised_user_circle</mat-icon>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Eample heart icon">supervised_user_circle</mat-icon>{{userName}}
      </button>
     
     <button mat-button [matMenuTriggerFor]="beforeMenu">

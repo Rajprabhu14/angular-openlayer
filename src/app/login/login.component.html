@@ -1,0 +1,30 @@
+<div class="login">
+  <div class= "close-dialog" (click)="closeDialog()">
+      <img src="assets/img/close.svg" alt="image" >
+  </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <mat-form-field appearance="outline">
+            <mat-label>user name</mat-label>
+            <input  matInput
+                    type="email"
+                    formControlName="email"
+                    placeholder="username">
+                    <mat-error  *ngIf="formControls.email.errors?.required">Email is required</mat-error>
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline">
+            <mat-label>password</mat-label>
+            <input matInput formControlName="password"
+                  type="password" placeholder="password">
+            <mat-error *ngIf="formControls.password.errors?.required">password is required</mat-error>     
+          </mat-form-field>
+          <div mat-dialog-actions align="center">
+              <button type="submit" mat-raised-button color="primary">Login</button>    
+              <button mat-raised-button color="accent">Clear</button>  
+            </div>
+        </form>
+</div>
+  
+    <!-- <button mat-button (click)="closeDialog()">Close</button>
+    <button mat-button (click)="openDialog()">Login</button> -->
+  <!-- </div> -->
