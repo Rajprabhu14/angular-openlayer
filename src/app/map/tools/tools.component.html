@@ -1,0 +1,17 @@
+<mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" vertical >
+  <mat-button-toggle 
+    (change)="zoominEvent($event)"
+    value="zoomIn">
+    <fa-icon [icon]="zoominIcon"></fa-icon>
+  </mat-button-toggle>
+  <mat-button-toggle 
+    (change)="zoomoutEvent($event)"
+    value="zoomOut">
+    <fa-icon [icon]="zoomoutIcon"></fa-icon>
+  </mat-button-toggle>
+  <mat-button-toggle 
+  (change)="fullScreen($event)"
+    value="fullScreen">
+    <fa-icon [icon]="fullscreenIcon"></fa-icon>
+  </mat-button-toggle>
+</mat-button-toggle-group>

@@ -5,7 +5,7 @@ import TileLayer from 'ol/layer/Tile.js';
 import {fromLonLat} from 'ol/proj.js';
 import OSM from 'ol/source/OSM.js';
 import "ol/ol.css";
-
+import {defaults as defaultControls}  from 'ol/control';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -33,8 +33,17 @@ export class MapComponent implements OnInit {
       view: new View({
         center:  fromLonLat([80, 13]),
         zoom: 6
+      }),
+      zoomOptions: false,
+      controls: defaultControls({
+        zoom:false,
+        attribution:false
       })
     });
+    // import {defaults as defaultControls, FullScreen}  from 'ol/control';
+    // controls: defaultControls().extend([
+    //   new FullScreen()
+    // ]),
   }
 
 }

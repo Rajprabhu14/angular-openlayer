@@ -1,0 +1,6 @@
+.mat-button-toggle{
+    color: rgba(0, 0, 0, .75);
+}
+.mat-button-toggle-label-content{
+    padding: 0 10px !important;
+}
