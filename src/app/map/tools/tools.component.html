@@ -1,17 +1,33 @@
-<mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" vertical >
-  <mat-button-toggle 
-    (change)="zoominEvent($event)"
+<mat-button-toggle-group appearance="legacy"
+    name="fontStyle"
+    [(value)] = "selectedTool"
+    aria-label="Font Style" vertical >
+  <mat-button-toggle
+    matTooltip="Zoom in"
+    (change)="zoominEvent()"
     value="zoomIn">
     <fa-icon [icon]="zoominIcon"></fa-icon>
   </mat-button-toggle>
-  <mat-button-toggle 
-    (change)="zoomoutEvent($event)"
+  <mat-button-toggle
+    matTooltip="Zoom out"
+    (change)="zoomoutEvent()"
     value="zoomOut">
     <fa-icon [icon]="zoomoutIcon"></fa-icon>
   </mat-button-toggle>
-  <mat-button-toggle 
-  (change)="fullScreen($event)"
-    value="fullScreen">
-    <fa-icon [icon]="fullscreenIcon"></fa-icon>
+  <mat-button-toggle
+    matTooltip="Measure"
+    (change)="drawTool()"
+    value="draw">
+    <fa-icon [icon]="drawIcon"></fa-icon>
   </mat-button-toggle>
 </mat-button-toggle-group>
+
+
+<mat-card class="example-card" *ngIf="selectedTool=='draw'">
+  <mat-card-header>
+    <mat-card-title>Draw</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-measure-tool ></app-measure-tool>
+  </mat-card-content>
+</mat-card>

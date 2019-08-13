@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
 import TileLayer from 'ol/layer/Tile.js';
+import {defaults as defaultInteractions} from 'ol/interaction.js';
 import {fromLonLat} from 'ol/proj.js';
 import OSM from 'ol/source/OSM.js';
 import "ol/ol.css";
@@ -21,6 +22,9 @@ export class MapComponent implements OnInit {
   initializeMap() {
     this.map = new Map({
       target: 'map',
+      interactions: defaultInteractions({
+          constrainResolution: false, onFocusOnly: false
+        }),
       layers: [
         new TileLayer({
           preload: 4,

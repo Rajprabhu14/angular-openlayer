@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { faSearchPlus, faSearchMinus, faCompress } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, Inject, forwardRef } from '@angular/core';
+import { faSearchPlus, faSearchMinus, faPencilRuler } from '@fortawesome/free-solid-svg-icons';
 import { MappingsContext } from 'source-list-map';
 import { MapComponent } from '../component/map.component';
 @Component({
@@ -10,30 +10,25 @@ import { MapComponent } from '../component/map.component';
 export class ToolsComponent implements OnInit {
   zoominIcon = faSearchPlus;
   zoomoutIcon = faSearchMinus;
-  fullscreenIcon = faCompress;
+  drawIcon = faPencilRuler;
   map: any;
-  constructor(private MapComponent) { 
-    this.map = MapComponent.map;
-  }
+  selectedTool:string;
+  constructor(@Inject(forwardRef(() => MapComponent)) private parentMap: MapComponent) {}
 
   ngOnInit() {
+    this.map = this.parentMap.map;
   }
   // Default zoom event
 
   // zoomin event
-  zoominEvent(value){
-    console.log(this.map);
-    console.log(value.source.checked);
-    // alert(value);
+  zoominEvent(){
+    this.map.getView().animate({zoom: this.map.getView().getZoom() + 1 });
   }
 
-  zoomoutEvent(value){
-    // console.log(value)
-    alert(value.source.checked);
+  zoomoutEvent(){
+    this.map.getView().animate({zoom: this.map.getView().getZoom() -  1 });
   }
 
-  fullScreen(value){
-    // console.log(value)
-    alert(value.source.checked);
+  drawTool(value){
   }
 }

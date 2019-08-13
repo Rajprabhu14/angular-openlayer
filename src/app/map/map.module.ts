@@ -5,12 +5,13 @@ import { MapRoutingModule } from './map-routing.module';
 import { ToolsComponent } from './tools/tools.component';
 import { DemoMaterialModule } from '../material-module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MeasureToolComponent } from './tools/measure-tool/measure-tool.component';
 @NgModule({
-  declarations: [MapComponent, ToolsComponent],
+  declarations: [MapComponent, ToolsComponent, MeasureToolComponent],
   imports: [
     CommonModule,
     MapRoutingModule,
-    DemoMaterialModule, 
+    DemoMaterialModule,
     FontAwesomeModule
   ],
   providers:[MapComponent]
