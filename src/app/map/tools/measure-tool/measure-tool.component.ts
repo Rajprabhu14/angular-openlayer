@@ -11,5 +11,7 @@ export class MeasureToolComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  activateDraw(value) {
+    alert(value);
+  }
 }

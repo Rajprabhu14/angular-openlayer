@@ -1,5 +1,5 @@
 <mat-card-actions>
-  <button mat-button>Point</button>
-  <button mat-button>Line</button>
-  <button mat-button>Polygon</button>
+  <button mat-button (click)="activateDraw('Point')">Point</button>
+  <button mat-button (click)="activateDraw('Line')">Line</button>
+  <button mat-button (click)="activateDraw('Polygon')">Polygon</button>
 </mat-card-actions>
