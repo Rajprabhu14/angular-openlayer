@@ -21,10 +21,16 @@ export class MeasureToolComponent implements OnInit, OnDestroy {
   sketch: any;
   measureTooltipElement: any;
   measureTooltip: any;
+  selectedLengthUnit: string;
+  selectedAreaUnit: string;
   // Message to show when the user is drawing a polygon.
   continuePolygonMsg = 'Click to continue drawing the polygon';
  // Message to show when the user is drawing a line
   continueLineMsg = 'Click to continue drawing the line';
+  selectedDrawOption: string;
+  // measure units
+  lengthUnits = ['km', 'm'];
+  areaUnits = ['km', 'm'];
   vector: VectorLayer = new VectorLayer({
     source: this.source,
     style: new Style({
@@ -48,24 +54,32 @@ export class MeasureToolComponent implements OnInit, OnDestroy {
   constructor(@Inject(forwardRef(() => MapComponent)) private parentMap: MapComponent) {}
 
   ngOnInit() {
+    this.selectedAreaUnit = 'km';
+    this.selectedLengthUnit = 'km';
     this.map = this.parentMap.map;
     this.map.addLayer(this.vector);
     this.draw = new Draw({
       source: this.source,
 
     });
-
+    this.createMeasureTooltip();
+    this.createHelpTooltip();
     this.map.on('pointermove', this.pointerMoveHandler.bind(this));
 
     this.map.getViewport().addEventListener('mouseout', function() {
       this.helpTooltipElement.classList.add('hidden');
     }.bind(this));
-    // this.map.addInteraction(this.draw);
   }
 
   ngOnDestroy() {
     this.map.removeLayer(this.vector);
     this.map.removeInteraction(this.draw);
+    this.map.removeOverlay(this.helpTooltip);
+    const elements = document.getElementsByClassName('tooltip-static');
+    while (elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+    this.map.removeOverlay(this.measureTooltip);
   }
   activateDraw(value) {
     this.map.removeInteraction(this.draw);
@@ -74,6 +88,7 @@ export class MeasureToolComponent implements OnInit, OnDestroy {
   }
 
   addInteraction(value) {
+    this.selectedDrawOption = value;
     if (value !== 'None') {
     this.draw = new Draw({
       source: this.source,
@@ -99,8 +114,6 @@ export class MeasureToolComponent implements OnInit, OnDestroy {
       })
     });
     this.map.addInteraction(this.draw);
-    this.createMeasureTooltip();
-    this.createHelpTooltip();
     let listener: any;
     this.draw.on('drawstart',(evt) => {
       let _this = this;
@@ -160,28 +173,36 @@ export class MeasureToolComponent implements OnInit, OnDestroy {
     this.helpTooltipElement.classList.remove('hidden');
   }
 
+  // format area
   formatArea(polygon) {
     let area = getArea(polygon);
     let output;
-    if (area > 10000) {
-      output = (Math.round(area / 1000000 * 100) / 100) +
-          ' ' + 'km<sup>2</sup>';
-    } else {
-      output = (Math.round(area * 100) / 100) +
+    switch (this.selectedAreaUnit) {
+      case 'm':
+          output = (Math.round(area * 100) / 100) +
           ' ' + 'm<sup>2</sup>';
+          break;
+      case 'km':
+          output = (Math.round(area / 1000000 * 100) / 100) +
+          ' ' + 'km<sup>2</sup>';
+          break;
     }
     return output;
   }
 
+  // format length
   formatLength(line) {
     let length = getLength(line);
     let output;
-    if (length > 100) {
-      output = (Math.round(length / 1000 * 100) / 100) +
-          ' ' + 'km';
-    } else {
-      output = (Math.round(length * 100) / 100) +
+    switch (this.selectedLengthUnit) {
+      case 'm':
+          output = (Math.round(length * 100) / 100) +
           ' ' + 'm';
+          break;
+      case 'km':
+          output = (Math.round(length / 1000 * 100) / 100) +
+          ' ' + 'km';
+          break;
     }
     return output;
   }

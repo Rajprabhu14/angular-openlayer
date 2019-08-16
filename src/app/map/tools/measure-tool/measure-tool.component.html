@@ -3,3 +3,21 @@
   <button mat-raised-button (click)="activateDraw('LineString')" focused>Line</button>
   <button mat-raised-button (click)="activateDraw('Polygon')">Polygon</button>
 </mat-card-actions>
+
+<mat-form-field *ngIf="selectedDrawOption == 'LineString'">
+  <mat-label>Measure Length Units</mat-label>
+  <mat-select  [(value)]="selectedLengthUnit">
+    <mat-option *ngFor="let unit of lengthUnits" [value]="unit">
+      {{unit}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="selectedDrawOption == 'Polygon'">
+  <mat-label>Measure Area Units</mat-label>
+  <mat-select  [(value)]="selectedAreaUnit">
+    <mat-option *ngFor="let unit of areaUnits" [value]="unit">
+      {{unit}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

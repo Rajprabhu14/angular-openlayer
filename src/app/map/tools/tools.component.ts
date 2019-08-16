@@ -30,6 +30,10 @@ export class ToolsComponent implements OnInit {
     this.map.getView().animate({zoom: this.map.getView().getZoom() -  1 });
   }
 
-  drawTool(value){
+  // drawTool(value){
+  // }
+  // close tool
+  closeTool(value) {
+    this.selectedTool = '';
   }
 }
