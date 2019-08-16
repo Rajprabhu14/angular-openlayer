@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, forwardRef } from '@angular/core';
-import { faSearchPlus, faSearchMinus, faPencilRuler } from '@fortawesome/free-solid-svg-icons';
+import { faSearchPlus, faSearchMinus, faPencilRuler, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { MappingsContext } from 'source-list-map';
 import { MapComponent } from '../component/map.component';
 @Component({
@@ -11,6 +11,7 @@ export class ToolsComponent implements OnInit {
   zoominIcon = faSearchPlus;
   zoomoutIcon = faSearchMinus;
   drawIcon = faPencilRuler;
+  closeIcon = faTimes;
   map: any;
   selectedTool:string;
   constructor(@Inject(forwardRef(() => MapComponent)) private parentMap: MapComponent) {}

@@ -24,9 +24,10 @@
 
 
 <mat-card class="example-card" *ngIf="selectedTool=='draw'">
-  <mat-card-header>
-    <mat-card-title>Draw</mat-card-title>
-  </mat-card-header>
+  <mat-card-title>Draw
+    <fa-icon [icon]="closeIcon" class="close-icon"></fa-icon>
+  </mat-card-title>
+  <mat-divider></mat-divider>
   <mat-card-content>
     <app-measure-tool ></app-measure-tool>
   </mat-card-content>

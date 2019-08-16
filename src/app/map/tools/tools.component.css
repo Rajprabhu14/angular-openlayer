@@ -17,3 +17,11 @@
   top: 70px;
   right: 70px;
 }
+.close-icon {
+  float: right;
+  cursor: pointer;
+  color: #a3a2a5;
+}
+.close-icon:focus,.close-icon:hover {
+  color:black
+}
