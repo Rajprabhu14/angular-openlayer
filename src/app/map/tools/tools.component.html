@@ -15,19 +15,37 @@
     <fa-icon [icon]="zoomoutIcon"></fa-icon>
   </mat-button-toggle>
   <mat-button-toggle
+    (change)="openPanelTool()"
     matTooltip="Measure"
-    value="draw">
+    value="measure">
     <fa-icon [icon]="drawIcon"></fa-icon>
+  </mat-button-toggle>
+  <mat-button-toggle
+    (change)="openPanelTool()"
+    matTooltip="Get Feature Info"
+    value="gfi">
+    <fa-icon [icon]="gfiIcon"></fa-icon>
   </mat-button-toggle>
 </mat-button-toggle-group>
 
-
-<mat-card class="example-card" *ngIf="selectedTool=='draw'">
-  <mat-card-title>Draw
-    <fa-icon [icon]="closeIcon" class="close-icon" (click)="closeTool('draw')"></fa-icon>
-  </mat-card-title>
+<!-- Measure tool card -->
+<mat-card class="example-card" *ngIf="selectedTool=='measure'" [@toggleState]="shouldToggle">
+<mat-card-subtitle>  <fa-icon [icon]="drawIcon"></fa-icon> &nbsp; Measure
+    <fa-icon [icon]="closeIcon" class="close-icon" (click)="closeTool('measure')"></fa-icon>
+  </mat-card-subtitle>
   <mat-divider></mat-divider>
   <mat-card-content>
     <app-measure-tool ></app-measure-tool>
   </mat-card-content>
 </mat-card>
+
+<!-- GFi tool card -->
+<mat-card class="example-card" *ngIf="selectedTool=='gfi'" [@toggleState]="shouldToggle">
+  <mat-card-subtitle>  <fa-icon [icon]="gfiIcon"></fa-icon> &nbsp; GFI
+      <fa-icon [icon]="closeIcon" class="close-icon" (click)="closeTool()"></fa-icon>
+    </mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <app-gfi-tool></app-gfi-tool>
+    </mat-card-content>
+  </mat-card>
