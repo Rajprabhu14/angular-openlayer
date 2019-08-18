@@ -1,10 +1,19 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+
 export class Gfi {
     parameterForDisplay = {
         'ne':{
-            'Name': 'abbrev',
-            'Economy Rank': 'economy',
-            'Last Census taken': 'lastcensus',
-            'Population': 'pop_est'
+            'layerName': 'Countries',
+            'value':{
+                'Name': 'abbrev',
+                'Economy Rank': 'economy',
+                'Last Census taken': 'lastcensus',
+                'Population': 'pop_est'
+            }
         }
     };
     getConfig (layerName){
