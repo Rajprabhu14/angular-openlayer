@@ -3,8 +3,8 @@ import { MapComponent } from '../../component/map.component';
 import { HttpRequestService } from '../../../service/http-request.service';
 import Overlay from 'ol/Overlay.js';
 import { MapService } from 'src/app/service/map.service';
-import {NestedTreeControl} from '@angular/cdk/tree';
-import {MatTreeNestedDataSource} from '@angular/material/tree';
+import {NestedTreeControl, FlatTreeControl} from '@angular/cdk/tree';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 
 @Component({
   selector: 'app-gfi-tool',
@@ -12,9 +12,6 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
   styleUrls: ['./gfi-tool.component.css']
 })
 export class GfiToolComponent implements OnInit, OnDestroy {
-  treeControl = new NestedTreeControl<any>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<any>();
-  hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   message = 'Select Feature on map';
   map: any;
   avaiableLayers: any[];
@@ -30,7 +27,28 @@ export class GfiToolComponent implements OnInit, OnDestroy {
     this.map = this.parentMap.map;
    
    }
+   // mat tree start
+   private _transformer = (node, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      level: level,
+    };
+  }
+
+  treeFlattener = new MatTreeFlattener(
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
+
+  treeControl = new FlatTreeControl<any>(
+    node => node.level, node => node.expandable);
+
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+  // dataSource = new MatTreeNestedDataSource<any>();
+  hasChild = (_: number, node) => node.expandable;
   
+  // tree end
+
   ngOnInit() {
     this.displayTree = false;
     this.avaiableLayers = this.getWMSLayers();
