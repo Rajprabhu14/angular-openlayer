@@ -9,7 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
+import { ErrorInterceptorService } from './service/error-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,9 @@ import { HttpClientModule } from '@angular/common/http';
     DemoMaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
