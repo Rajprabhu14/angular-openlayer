@@ -58,4 +58,19 @@ export class AuthService {
   public get currentUserValue()  {
     return this.currentUserSubject.value;
   }
+
+  refreshAccessToken() {
+    return this.http.post<any>('http://localhost:8000/aapi/token/refresh/', 
+            {'refresh': this.currentUserValue.refresh})
+            .pipe(
+              map(
+                token => {
+                  if(token.access){
+                    localStorage.setItem('currentUser', JSON.stringify(token));
+                  }
+                  return token;
+                }
+              )
+            );
+  }
 }

@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { ErrorInterceptorService } from './service/error-interceptor.service';
+import { JwtInterceptorService } from './service/jwt-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { ErrorInterceptorService } from './service/error-interceptor.service';
     HttpClientModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass:JwtInterceptorService, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
