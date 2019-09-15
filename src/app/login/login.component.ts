@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   isSubmitted  =  false;
   loading = false;
   returnUrl: string;
+  loginFailure = false;
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
     private formBuilder: FormBuilder,
@@ -77,12 +78,19 @@ export class LoginComponent implements OnInit {
           data => {
             this.router.navigate(['map']);
             this.closeDialog();
+            this.loginFailure = false;
           },
           error => {
             this.loading = false;
+            this.loginFailure = true
           }
         )
   }
 
   get formControls() { return this.loginForm.controls; }
+
+  clearInput(){
+    this.loginForm.reset();
+    this.loginFailure = false;
+  }
 }

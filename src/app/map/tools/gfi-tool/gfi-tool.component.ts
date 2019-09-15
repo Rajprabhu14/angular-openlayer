@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, forwardRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, forwardRef, OnDestroy, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { MapComponent } from '../../component/map.component';
 import { HttpRequestService } from '../../../service/http-request.service';
 import Overlay from 'ol/Overlay.js';
@@ -20,7 +20,22 @@ export class GfiToolComponent implements OnInit, OnDestroy {
   this_ = this;
   gfiTree: any[];
   displayTree = false;
-  
+  columnsToDisplay = ['params', 'value'];
+  displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  dataSource = [
+    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+    {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  ];
+  @ViewChildren('dataForLayer') dataForLayer: QueryList<ElementRef>;
+  @ViewChildren('treeOpen') treeOpen: QueryList<ElementRef>;
   constructor(@Inject(forwardRef(() => MapComponent)) private parentMap: MapComponent,
               private httpRequest: HttpRequestService,
               private mapService: MapService) {
@@ -28,24 +43,24 @@ export class GfiToolComponent implements OnInit, OnDestroy {
    
    }
    // mat tree start
-   private _transformer = (node, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level,
-    };
-  }
+  //  private _transformer = (node, level: number) => {
+  //   return {
+  //     expandable: !!node.children && node.children.length > 0,
+  //     name: node.name,
+  //     level: level,
+  //   };
+  // }
 
-  treeFlattener = new MatTreeFlattener(
-    this._transformer, node => node.level, node => node.expandable, node => node.children);
+  // treeFlattener = new MatTreeFlattener(
+  //   this._transformer, node => node.level, node => node.expandable, node => node.children);
 
-  treeControl = new FlatTreeControl<any>(
-    node => node.level, node => node.expandable);
+  // treeControl = new FlatTreeControl<any>(
+  //   node => node.level, node => node.expandable);
 
-  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  // dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  // dataSource = new MatTreeNestedDataSource<any>();
-  hasChild = (_: number, node) => node.expandable;
+  // // dataSource = new MatTreeNestedDataSource<any>();
+  // hasChild = (_: number, node) => node.expandable;
   
   // tree end
 
@@ -112,19 +127,24 @@ export class GfiToolComponent implements OnInit, OnDestroy {
           obj["name"] = layerDetails.layerName;
           response.features.forEach((feature) => {
             let layerKeyPair = Object.assign({}, layerDetails.value);
+            let tableObjArr = [];
             for (let key in layerKeyPair) {
-              layerKeyPair[key] = feature["properties"][layerKeyPair[key]];
+              tableObjArr.push({
+                "params": key,
+               "value": feature["properties"][layerKeyPair[key]]
+              });
+              // layerKeyPair[key] = feature["properties"][layerKeyPair[key]];
             }
             
             let child = {
               "name": feature.id.split('.').slice(-1)[0],
-              children: []
+              table:tableObjArr
             };
-            child["children"].push(Object.assign({}, layerKeyPair));
             obj["children"].push(child);
           });
           this.gfiTree.push(obj);
-          this.dataSource.data = this.gfiTree;
+          console.log(this.gfiTree);
+          // this.dataSource.data = this.gfiTree;
           this.displayTree = true
         }).bind(this));
     });
@@ -146,5 +166,18 @@ export class GfiToolComponent implements OnInit, OnDestroy {
       positioning: 'center-left'
     });
     this.map.addOverlay(this.helpTooltip);
+  }
+
+  openGFITree(i, layerName:string, event) {
+    event.srcElement.classList.toggle("caret-down");
+    let currentChild =  this.dataForLayer.filter((ele, idx) => idx == i)[0];
+    currentChild.nativeElement.classList.toggle('active');
+    console.log(this.gfiTree[i].children[i]);
+  }
+
+  openTree(j, layerName:string, event){
+    event.srcElement.classList.toggle("caret-down");
+    let currentChild =  this.treeOpen.filter((ele, idx) => idx == j)[0];
+    currentChild.nativeElement.classList.toggle('active');
   }
 }

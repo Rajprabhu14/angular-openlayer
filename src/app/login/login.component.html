@@ -18,9 +18,11 @@
                   type="password" placeholder="password">
             <mat-error *ngIf="formControls.password.errors?.required">password is required</mat-error>     
           </mat-form-field>
+          
+          <mat-error  align="center" *ngIf="loginFailure">Incorrect Username/Password</mat-error>
           <div mat-dialog-actions align="center">
               <button type="submit" mat-raised-button color="primary">Login</button>    
-              <button mat-raised-button color="accent">Clear</button>  
+              <button mat-raised-button color="accent" (click)="clearInput()">Clear</button>  
             </div>
         </form>
 </div>
