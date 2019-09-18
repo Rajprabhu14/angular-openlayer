@@ -10,7 +10,7 @@ const helper = new JwtHelperService();
   providedIn: 'root'
 })
 export class AuthService {
-  public getLoggedInName = new Subject(); 
+  public getLoggedInName = new Subject();
   public currentUser: Observable<User>;
   private currentUserSubject: BehaviorSubject<User>;
   private username: string;
@@ -50,7 +50,7 @@ export class AuthService {
             if(user && user.access){
               // store user details and jwt token in local storage to keep user logged in between page refreshes
               localStorage.setItem('currentUser', JSON.stringify(user));
-              this.currentUserSubject.next(this.getUserName());
+              this.currentUserSubject.next(null);
             }
             return user;
           }));
@@ -61,7 +61,7 @@ export class AuthService {
   }
 
   refreshAccessToken() {
-    return this.http.post<any>('http://localhost:8000/api/token/refresh/', 
+    return this.http.post<any>('http://localhost:8000/api/token/refresh/',
             {'refresh': this.currentUserValue.refresh})
             .pipe(
               map(

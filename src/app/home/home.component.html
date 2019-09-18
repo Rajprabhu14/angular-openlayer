@@ -1,3 +1,33 @@
-<p  class="mat-h2">
-  Welcome To Routing Application
-</p>
+
+<mat-grid-list cols="4" rowHeight="50px" role="listitem">
+  <mat-grid-tile colspan=4 roswspan=1>
+    <p  class="mat-h2">
+      Welcome To Routing Application
+    </p>
+    <br/>
+  </mat-grid-tile>
+  <mat-grid-tile colspan=4 roswspan=1>
+      <p class="mat-h3">This is the Pilot project which is build on top with openlayers & angular Material</p>
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="4" rowHeight="200px" role="listitem">
+    <mat-grid-tile colspan=2 roswspan=1>
+        <p class="mat-h2 feature-header">Feature Implemented </p>
+      <mat-selection-list #toolsImplemented>
+        <mat-list-option
+            color="primary"
+            *ngFor="let feature of implementedFeatures"
+            selected=true>
+          {{feature}}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-grid-tile>
+    <mat-grid-tile colspan=2 roswspan=1>
+        <p class="mat-h2 feature-header">Feature Planned</p>
+        <mat-selection-list #future >
+          <mat-list-option *ngFor="let feature of futureImplemented" disabled=true>
+            {{feature}}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-grid-tile>
+</mat-grid-list>

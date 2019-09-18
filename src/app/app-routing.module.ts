@@ -4,9 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: 'map', 
+  { path: 'map',
   loadChildren: './map/map.module#MapModule'
-  , canActivate:[AuthGuard] 
+  , canActivate: [AuthGuard]
 },
   {path: '**', component: HomeComponent}
 ];
