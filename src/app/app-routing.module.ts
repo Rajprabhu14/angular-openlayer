@@ -6,7 +6,8 @@ import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   { path: 'map',
   loadChildren: './map/map.module#MapModule'
-  , canActivate: [AuthGuard]
+  // activate Authguard
+  // , canActivate: [AuthGuard]
 },
   {path: '**', component: HomeComponent}
 ];

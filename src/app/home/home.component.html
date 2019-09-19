@@ -1,6 +1,6 @@
 
 <mat-grid-list cols="4" rowHeight="50px" role="listitem">
-  <mat-grid-tile colspan=4 roswspan=1>
+  <mat-grid-tile colspan=4 roswspan=1 style="overflow: none !important">
     <p  class="mat-h2">
       Welcome To Routing Application
     </p>
@@ -10,7 +10,7 @@
       <p class="mat-h3">This is the Pilot project which is build on top with openlayers & angular Material</p>
     </mat-grid-tile>
 </mat-grid-list>
-<mat-grid-list cols="4" rowHeight="200px" role="listitem">
+<mat-grid-list [cols]="breakpoint"  rowHeight="200px" (window:resize)="onResize($event)">
     <mat-grid-tile colspan=2 roswspan=1>
         <p class="mat-h2 feature-header">Feature Implemented </p>
       <mat-selection-list #toolsImplemented>

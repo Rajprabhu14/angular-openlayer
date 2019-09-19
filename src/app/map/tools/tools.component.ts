@@ -13,7 +13,7 @@ import { MapComponent } from '../component/map.component';
   selector: 'app-tools',
   templateUrl: './tools.component.html',
   styleUrls: ['./tools.component.css'],
-  
+
   animations: [
     trigger(
       'toggleState', [
@@ -60,10 +60,10 @@ export class ToolsComponent implements OnInit {
     this.selectedTool = '';
   }
 
-  openPanelTool(value){
+  openPanelTool(){
     this.shouldToggle = !this.shouldToggle;
   }
-  
+
   // close tool
   closeTool() {
     this.shouldToggle = !this.shouldToggle;
