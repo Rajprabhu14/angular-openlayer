@@ -12,12 +12,16 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { ErrorInterceptorService } from './service/error-interceptor.service';
 import { JwtInterceptorService } from './service/jwt-interceptor.service';
+import { RegisterComponent } from './register/register.component';
+import { AlertComponent } from './alert/alert.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent,
+    AlertComponent
   ],
   entryComponents: [
     LoginComponent

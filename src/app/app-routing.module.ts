@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: 'map',
@@ -9,6 +10,7 @@ const routes: Routes = [
   // activate Authguard
   // , canActivate: [AuthGuard]
 },
+  {path: 'registerUser', component: RegisterComponent},
   {path: '**', component: HomeComponent}
 ];
 

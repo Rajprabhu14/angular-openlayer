@@ -2,22 +2,27 @@
   <mat-toolbar-row >
       <span routerLink="/">WebGIS</span>
     <span class="example-spacer"></span>
-     <button mat-button (click)="openDialog()" *ngIf="!isLoggedIn">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Eample heart icon">supervised_user_circle</mat-icon>Login
+     <button mat-button (click)="openDialog()" *ngIf="!isLoggedIn">Login
      </button>
      <button mat-button *ngIf="isLoggedIn" [matMenuTriggerFor]="isLoggedMenu">
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Eample heart icon">supervised_user_circle</mat-icon>{{userName}}
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Eample heart icon"></mat-icon>{{userName}}
      </button>
      <mat-menu #isLoggedMenu="matMenu" xPosition="before">
       <button mat-menu-item (click)="logout()" >Logout</button>
-    </mat-menu>
-    <button mat-button [matMenuTriggerFor]="beforeMenu">
+   </mat-menu>
+     <!-- <button mat-button [matMenuTriggerFor]="beforeMenu">
     <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">apps</mat-icon>
-    </button>
-    <mat-menu #beforeMenu="matMenu" xPosition="before">
+    </button> -->
+    <button mat-button  *ngIf="!isLoggedIn" routerLink="/registerUser" routerLinkActive="active">
+      <mat-icon class="example-icon" 
+                aria-hidden="false" 
+                aria-label="Eample heart icon">supervised_user_circle</mat-icon>
+                Register
+     </button>
+    <!-- <mat-menu #beforeMenu="matMenu" xPosition="before">
         <button mat-menu-item>Item 1</button>
         <button mat-menu-item>Item 2</button>
-    </mat-menu>
+    </mat-menu> -->
 
   </mat-toolbar-row>
 </mat-toolbar>

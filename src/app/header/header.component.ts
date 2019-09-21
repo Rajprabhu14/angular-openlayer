@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/']);
     this.isLoggedIn = false;
   }
+
   ngOnInit() {
     this.authService.currentUser.subscribe((name) => {
       this.userName = this.authService.getUserName();

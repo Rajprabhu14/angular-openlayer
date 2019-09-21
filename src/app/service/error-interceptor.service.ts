@@ -22,6 +22,9 @@ export class ErrorInterceptorService implements HttpInterceptor {
       // We don't want to refresh token for some requests like login or refresh token itself
       // So we verify url and we throw an error if it's the case
       const error = err.error.message || err.statusText;
+      if(request.url.includes("accounts/create")){
+        return throwError(err.error);
+      }
       if(request.url.includes("token") ||
          request.url.includes("refresh") 
         ){
