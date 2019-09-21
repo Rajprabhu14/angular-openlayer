@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'map',
   loadChildren: './map/map.module#MapModule'
   // activate Authguard
-  // , canActivate: [AuthGuard]
+  , canActivate: [AuthGuard]
 },
   {path: 'registerUser', component: RegisterComponent},
   {path: '**', component: HomeComponent}
