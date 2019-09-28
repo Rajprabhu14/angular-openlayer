@@ -44,7 +44,7 @@ export class AuthService {
   }
   loginJWT(userInfo: User){
     localStorage.setItem('userName', userInfo.username);
-    return this.http.post<any>(`http://localhost:8000/api/token/`, userInfo)
+    return this.http.post<any>(`http://15.206.39.160/rest/api/token/`, userInfo)
           .pipe(map(user => {
             // login successful if there's a jwt token in the response
             if(user && user.access){
@@ -61,7 +61,7 @@ export class AuthService {
   }
 
   refreshAccessToken() {
-    return this.http.post<any>('http://localhost:8000/api/token/refresh/',
+    return this.http.post<any>('http://15.206.39.160/rest/api/token/refresh/',
             {'refresh': this.currentUserValue.refresh})
             .pipe(
               map(
