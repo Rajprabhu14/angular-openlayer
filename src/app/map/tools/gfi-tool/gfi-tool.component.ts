@@ -21,19 +21,6 @@ export class GfiToolComponent implements OnInit, OnDestroy {
   gfiTree: any[];
   displayTree = false;
   columnsToDisplay = ['params', 'value'];
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = [
-    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-    {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  ];
   @ViewChildren('dataForLayer') dataForLayer: QueryList<ElementRef>;
   @ViewChildren('treeOpen') treeOpen: QueryList<ElementRef>;
   constructor(@Inject(forwardRef(() => MapComponent)) private parentMap: MapComponent,
@@ -42,27 +29,6 @@ export class GfiToolComponent implements OnInit, OnDestroy {
     this.map = this.parentMap.map;
    
    }
-   // mat tree start
-  //  private _transformer = (node, level: number) => {
-  //   return {
-  //     expandable: !!node.children && node.children.length > 0,
-  //     name: node.name,
-  //     level: level,
-  //   };
-  // }
-
-  // treeFlattener = new MatTreeFlattener(
-  //   this._transformer, node => node.level, node => node.expandable, node => node.children);
-
-  // treeControl = new FlatTreeControl<any>(
-  //   node => node.level, node => node.expandable);
-
-  // dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-  // // dataSource = new MatTreeNestedDataSource<any>();
-  // hasChild = (_: number, node) => node.expandable;
-  
-  // tree end
 
   ngOnInit() {
     this.displayTree = false;

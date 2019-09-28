@@ -4,6 +4,7 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { environment } from './../../environments/environment'
 
 const helper = new JwtHelperService();
 @Injectable({
@@ -44,7 +45,7 @@ export class AuthService {
   }
   loginJWT(userInfo: User){
     localStorage.setItem('userName', userInfo.username);
-    return this.http.post<any>(`http://15.206.39.160/rest/api/token/`, userInfo)
+    return this.http.post<any>(`${environment.apiUrl}/rest/api/token/`, userInfo)
           .pipe(map(user => {
             // login successful if there's a jwt token in the response
             if(user && user.access){
@@ -61,7 +62,7 @@ export class AuthService {
   }
 
   refreshAccessToken() {
-    return this.http.post<any>('http://15.206.39.160/rest/api/token/refresh/',
+    return this.http.post<any>(`${environment.apiUrl}/rest/api/token/refresh/`,
             {'refresh': this.currentUserValue.refresh})
             .pipe(
               map(
