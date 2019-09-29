@@ -4,8 +4,26 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:8000/",
-  geoserverurl: "http://localhost:8080/"
+  apiUrl: "http://localhost/",
+  geoserverurl: "http://localhost:8080/",
+  defaultZoom: 6,
+  center: [80, 13],
+  layers: {
+    "POI":{
+      layerURL: 'http://localhost:8080/geoserver/tamil_nadu_ws/wms',
+      layername: 'tamil_nadu_poi',
+      layerType: 'wms',
+      tiled: true,
+      overlay: true
+    },
+    "Highway":{
+      layerURL: 'http://localhost:8080/geoserver/tamil_nadu_ws/wms',
+      layername: 'tamil_nadu_highway',
+      layerType: 'wms',
+      tiled: true,
+      overlay: true
+    }
+  }
 };
 
 /*

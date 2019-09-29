@@ -7,8 +7,9 @@ import { DemoMaterialModule } from '../material-module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MeasureToolComponent } from './tools/measure-tool/measure-tool.component';
 import { GfiToolComponent } from './tools/gfi-tool/gfi-tool.component';
+import { LayerPanelComponent } from './layer-panel/layer-panel.component';
 @NgModule({
-  declarations: [MapComponent, ToolsComponent, MeasureToolComponent, GfiToolComponent],
+  declarations: [MapComponent, ToolsComponent, MeasureToolComponent, GfiToolComponent, LayerPanelComponent],
   imports: [
     CommonModule,
     MapRoutingModule,
