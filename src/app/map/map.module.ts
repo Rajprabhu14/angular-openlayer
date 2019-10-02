@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapComponent } from './component/map.component';
 import { MapRoutingModule } from './map-routing.module';
@@ -16,6 +16,10 @@ import { LayerPanelComponent } from './layer-panel/layer-panel.component';
     DemoMaterialModule,
     FontAwesomeModule
   ],
-  providers:[MapComponent]
+  providers:[MapComponent],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
+]
 })
 export class MapModule { }

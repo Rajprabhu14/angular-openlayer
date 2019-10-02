@@ -22,7 +22,27 @@ export class MapService {
             'Last Census taken': 'lastcensus',
             'Population': 'pop_est'
         }
-    }
+    },
+    'tamil_nadu_highway':{
+      'layerName': 'Roads',
+      'value':{
+          'Name': 'Name',
+          'TYPE': 'Type',
+          'ONEWAY': 'Oneway',
+          'LANES': 'Lanes'
+      }
+  },
+  'tamil_nadu_poi':{
+      'layerName': 'Places',
+      'value':{
+          'Name': 'Name',
+          'PLACE': 'Place',
+          'ADDR:FLATS': 'Flat No',
+          'ADDR:HOUSE': 'house No',
+          'ADDR:CITY': 'City',
+          'ADDR:POSTC': 'Post code',
+      }
+  }
   };
   
   getGFIParamsConfig (layerName){

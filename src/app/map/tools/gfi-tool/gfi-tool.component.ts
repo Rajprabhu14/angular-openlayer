@@ -40,10 +40,11 @@ export class GfiToolComponent implements OnInit, OnDestroy {
         return;
       }
       var pixel = this.map.getEventPixel(evt.originalEvent);
-      var hit = this.map.forEachLayerAtPixel(pixel, function() {
-        return true;
-      });
-      this.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+      // var hit = this.map.forEachLayerAtPixel(pixel, function() {
+      //   return true;
+      // });
+      // this.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+      this.map.getTargetElement().style.cursor = 'pointer';
 
       let helpMsg = 'Click on map to get info';
   

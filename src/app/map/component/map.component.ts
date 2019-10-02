@@ -1,18 +1,11 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import Map from 'ol/Map.js';
-import View from 'ol/View.js';
-import TileLayer from 'ol/layer/Tile.js';
-
-import TileWMS from 'ol/source/TileWMS.js';
-import {defaults as defaultInteractions} from 'ol/interaction.js';
 import {fromLonLat} from 'ol/proj.js';
-import OSM from 'ol/source/OSM.js';
 import "ol/ol.css";
-import {defaults as defaultControls}  from 'ol/control';
 import {faListAlt } from '@fortawesome/free-solid-svg-icons';
-import {MatButtonModule} from '@angular/material/button';
 import { MapService } from 'src/app/service/map.service';
 import { environment as env } from 'src/environments/environment';
+import { LayerPanelComponent } from './../layer-panel/layer-panel.component';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -22,6 +15,8 @@ export class MapComponent implements OnInit {
   map: Map;
   internalMapId: string;
   listIcon = faListAlt;
+
+  @ViewChild('layerPanel') layerPanel: LayerPanelComponent
    /** Map id */
    @Input() id: string;
   // if values are not provided value will be taken from environment
@@ -38,8 +33,7 @@ export class MapComponent implements OnInit {
   @Input() zoom: string;
 
 
-  constructor(private mapService: MapService,
-    private elementRef: ElementRef) { }
+  constructor(private mapService: MapService) { }
 
   ngOnInit() {
     this.initializeMap();
@@ -48,7 +42,6 @@ export class MapComponent implements OnInit {
     this.map = this.mapService.getMap(this.id);
     if(!this.id){
       this.id = 'map';
-      this.map.setTarget(this.elementRef.nativeElement);
     }
     this.mapService.setId(this.id);
     
@@ -56,6 +49,10 @@ export class MapComponent implements OnInit {
     this.map.getView().setCenter(fromLonLat([parseFloat(this.lon) || env.center[0], 
     parseFloat(this.lat) || env.center[1]]));
     this.map.getView().setZoom(parseFloat(this.zoom) || env.defaultZoom);
+  }
+
+  openPanel(e){
+    this.layerPanel.openLayerPanel();
   }
 
 }

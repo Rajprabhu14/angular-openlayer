@@ -1,1 +1,15 @@
- <fa-icon [icon]="listIcon"></fa-icon>
+ <!-- <fa-icon [icon]="listIcon"></fa-icon> -->
+ <div [@toggleLayerPanel]="shouldToggle" [class.test]="shouldToggle" class="layer-container"> 
+<mat-card >
+    <mat-card-subtitle>Layer Panel
+        <fa-icon [icon]="closeIcon" class="close-icon" (click)="openLayerPanel()"></fa-icon>
+    </mat-card-subtitle>
+    
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+        <mat-list-item  *ngFor="let layer of overlayList" >
+            <mat-checkbox  value="layer" (change)="layerControl(layer, $event)" [checked]="layer.getProperties().active">{{layer.getProperties().displayName}}</mat-checkbox>
+        </mat-list-item>
+      </mat-nav-list>
+</mat-card>
+</div>
